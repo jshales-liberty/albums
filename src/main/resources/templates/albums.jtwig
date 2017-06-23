@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+{% for c in albums %}
+<div>
+    <ul>
+        <li>Title: {{c.title}}</li>
+        <li>Artist: {{c.artist}}</li>
+    </ul>
+</div>
+{% endfor %}
+
+<div>
+<a href="/json">Json Version</a>
+</div>
+
+<div>
+          Add a new album!</div>
+          <form action="/create/" method="get">
+          <div> Title: <input type="text" name="title">
+      </div>
+      <div>
+          Artist: <input type="text" name="artist">
+      </div>
+      <div>
+          <button type="submit" id="submit">Submit</button>
+      <div>
+      </form>
+<script>
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '/');
+xhr.onload = function(evt) {
+   if (xhr.status === 200) {
+   	var response = JSON.parse(xhr.responseText)
+   console.log(xhr.status);
+        
+    } else {
+        alert('Request failed.  Returned status of ' + xhr.status);
+    }
+};
+xhr.send();
+</script>
+
+</body>
+</html>
